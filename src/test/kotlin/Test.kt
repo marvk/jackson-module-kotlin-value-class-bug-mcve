@@ -1,11 +1,5 @@
 import io.kotest.assertions.throwables.shouldNotThrowAny
 import io.kotest.matchers.collections.shouldContainExactly
-import net.marvk.BazDataClass
-import net.marvk.BazValueClass
-import net.marvk.CSV
-import net.marvk.FooWithDataClass
-import net.marvk.FooWithValueClass
-import net.marvk.createReader
 import org.junit.jupiter.api.Test
 
 class Test {
