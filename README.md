@@ -20,6 +20,8 @@ the `ObjectMapper` has a `CsvSchema` that has column reordering enabled, jackson
     at net.marvk.MainKt.main(Main.kt:20)
     at net.marvk.MainKt.main(Main.kt)
 
+This issue does not exist for data classes or if column reordering is disabled.
+
 |                           | `data class` | `value class` |
 |---------------------------|--------------|---------------|
 | Column Reordering `false` | ✔            | ✔             |
