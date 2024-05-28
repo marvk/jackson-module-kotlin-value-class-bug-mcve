@@ -1,6 +1,6 @@
 # MCVE for jackson-kotlin-module value class deserialization bug
 
-There exists a bug in jackson-kotlin-module. When trying to deserialize a CSV into a data class that contains a field that is a `value class` and
+There exists a bug in jackson-kotlin-module. When trying to deserialize a CSV into a target class that contains a field that is a `value class` and
 the `ObjectMapper` has a `CsvSchema` that has column reordering enabled, jackson will produce the following exception:
 
     Exception in thread "main" com.fasterxml.jackson.databind.exc.UnrecognizedPropertyException: Unrecognized field "BAR_HEADER" (class net.marvk.FooWithValueClass), not marked as ignorable (2 known properties: "bar", "baz"])
