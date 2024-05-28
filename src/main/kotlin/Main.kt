@@ -16,17 +16,9 @@ val CSV = """
     bar1,baz1
 """.trimIndent()
 
-fun main() {
-    val dataClassValues =
-        createReader<FooWithValueClass>()
-            .readValues<FooWithValueClass>(CSV)
-            .readAll()
-
-    println(dataClassValues)
-}
-
 val MAPPER =
-    CsvMapper.builder()
+    CsvMapper
+        .builder()
         .addModule(
             SimpleModule()
                 .addDeserializer(BazValueClass::class.java, object : JsonDeserializer<BazValueClass>() {
@@ -39,29 +31,30 @@ val MAPPER =
         .addModule(kotlinModule())
         .build()
 
-inline fun <reified T> createSchema(): CsvSchema =
+inline fun <reified T> createSchema(columnReordering: Boolean): CsvSchema =
     MAPPER
         .schemaFor(T::class.java)
+        .withColumnReordering(columnReordering)
         .withHeader()
 
-inline fun <reified T> createReader(): ObjectReader =
+inline fun <reified T> createReader(columnReordering: Boolean): ObjectReader =
     MAPPER
         .readerFor(T::class.java)
         .with(CsvParser.Feature.WRAP_AS_ARRAY)
-        .with(createSchema<T>())
+        .with(createSchema<T>(columnReordering))
 
 data class FooWithValueClass(
     @JsonProperty("BAR_HEADER")
-    val bar: String,
+    val bar: String?,
     @JsonProperty("BAZ_HEADER")
-    val baz: BazValueClass,
+    val baz: BazValueClass?,
 )
 
 data class FooWithDataClass(
     @JsonProperty("BAR_HEADER")
-    val bar: String,
+    val bar: String?,
     @JsonProperty("BAZ_HEADER")
-    val baz: BazDataClass,
+    val baz: BazDataClass?,
 )
 
 @JvmInline
