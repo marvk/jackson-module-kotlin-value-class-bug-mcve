@@ -11,6 +11,15 @@ import com.fasterxml.jackson.dataformat.csv.CsvParser
 import com.fasterxml.jackson.dataformat.csv.CsvSchema
 import com.fasterxml.jackson.module.kotlin.kotlinModule
 
+/**
+ * Just show me the bug!
+ */
+fun main() {
+    createReader<FooWithValueClass>(true)
+        .readValues<FooWithValueClass>(CSV)
+        .readAll()
+}
+
 val CSV = """
     BAR_HEADER,BAZ_HEADER
     bar1,baz1
